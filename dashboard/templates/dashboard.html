@@ -9,25 +9,18 @@
 </head>
 <body>
 
-<!-- ヘッダー -->
 <header class="header">
     <div class="header-inner">
-        <h1 class="logo">
-            <span class="logo-icon">🏠</span>
-            価格ウォッチ
-            <span class="logo-sub">不動産査定ダッシュボード</span>
-        </h1>
+        <h1 class="logo"><span class="logo-icon">&#127968;</span> 価格ウォッチ <span class="logo-sub">不動産査定ダッシュボード</span></h1>
+        <button class="btn-print" id="btnPrint" style="display:none;" onclick="window.print()">&#128438; PDF出力</button>
     </div>
 </header>
 
 <main class="main">
-
-    <!-- 左: 入力フォーム -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
         <form id="assessForm" class="form-panel">
             <h2 class="panel-title">物件情報入力</h2>
 
-            <!-- 所在地 -->
             <fieldset class="fieldset">
                 <legend>所在地</legend>
                 <div class="field-row">
@@ -44,124 +37,111 @@
                 </div>
                 <div class="field-row">
                     <label>市区町村</label>
-                    <select name="city" id="city">
-                        <option value="世田谷区">世田谷区</option>
-                        <option value="渋谷区">渋谷区</option>
-                        <option value="新宿区">新宿区</option>
-                        <option value="杉並区">杉並区</option>
-                        <option value="目黒区">目黒区</option>
-                        <option value="大田区">大田区</option>
-                        <option value="練馬区">練馬区</option>
-                        <option value="板橋区">板橋区</option>
-                        <option value="横浜市">横浜市</option>
-                        <option value="川崎市">川崎市</option>
-                        <option value="さいたま市">さいたま市</option>
-                        <option value="千葉市">千葉市</option>
-                        <option value="大阪市">大阪市</option>
-                        <option value="名古屋市">名古屋市</option>
-                        <option value="福岡市">福岡市</option>
-                    </select>
+                    <select name="city" id="city"></select>
                 </div>
                 <div class="field-row">
                     <label>町名等</label>
-                    <input type="text" name="district" id="district" placeholder="上北沢3丁目">
+                    <input type="text" name="district" id="district" placeholder="例: 上北沢3丁目">
                 </div>
             </fieldset>
 
-            <!-- 土地 -->
             <fieldset class="fieldset">
                 <legend>土地情報</legend>
-                <div class="field-row">
-                    <label>土地面積（㎡）</label>
-                    <input type="number" name="land_area" id="land_area" value="120" step="0.1" min="10">
+                <div class="field-grid">
+                    <div class="field-row">
+                        <label>土地面積（&#13217;）</label>
+                        <input type="number" name="land_area" id="land_area" value="120" step="0.1" min="10">
+                    </div>
+                    <div class="field-row">
+                        <label>前面道路（m）</label>
+                        <input type="number" name="road_width" id="road_width" value="4.0" step="0.1" min="1">
+                    </div>
                 </div>
-                <div class="field-row">
-                    <label>形状</label>
-                    <select name="land_shape" id="land_shape">
-                        <option value="整形">整形（長方形）</option>
-                        <option value="台形">台形</option>
-                        <option value="旗竿地">旗竿地</option>
-                        <option value="不整形">不整形</option>
-                        <option value="三角形">三角形</option>
-                    </select>
-                </div>
-                <div class="field-row">
-                    <label>接道方向</label>
-                    <select name="facing" id="facing">
-                        <option value="南">南</option>
-                        <option value="南東">南東</option>
-                        <option value="南西">南西</option>
-                        <option value="東">東</option>
-                        <option value="西">西</option>
-                        <option value="北">北</option>
-                        <option value="角地">角地</option>
-                    </select>
-                </div>
-                <div class="field-row">
-                    <label>前面道路幅員（m）</label>
-                    <input type="number" name="road_width" id="road_width" value="4.0" step="0.1" min="1">
+                <div class="field-grid">
+                    <div class="field-row">
+                        <label>形状</label>
+                        <select name="land_shape" id="land_shape">
+                            <option value="整形">整形</option>
+                            <option value="台形">台形</option>
+                            <option value="旗竿地">旗竿地</option>
+                            <option value="不整形">不整形</option>
+                            <option value="三角形">三角形</option>
+                        </select>
+                    </div>
+                    <div class="field-row">
+                        <label>接道方向</label>
+                        <select name="facing" id="facing">
+                            <option value="南">南</option><option value="南東">南東</option><option value="南西">南西</option>
+                            <option value="東">東</option><option value="西">西</option><option value="北">北</option><option value="角地">角地</option>
+                        </select>
+                    </div>
                 </div>
             </fieldset>
 
-            <!-- 建物 -->
             <fieldset class="fieldset">
                 <legend>建物情報</legend>
-                <div class="field-row">
-                    <label>建物面積（㎡）</label>
-                    <input type="number" name="building_area" id="building_area" value="98" step="0.1" min="10">
+                <div class="field-grid">
+                    <div class="field-row">
+                        <label>建物面積（&#13217;）</label>
+                        <input type="number" name="building_area" id="building_area" value="98" step="0.1" min="10">
+                    </div>
+                    <div class="field-row">
+                        <label>築年数</label>
+                        <input type="number" name="building_age" id="building_age" value="15" min="0" max="100">
+                    </div>
                 </div>
-                <div class="field-row">
-                    <label>構造</label>
-                    <select name="structure" id="structure">
-                        <option value="木造">木造</option>
-                        <option value="軽量鉄骨">軽量鉄骨</option>
-                        <option value="鉄骨造">鉄骨造</option>
-                        <option value="RC造">RC造</option>
-                        <option value="SRC造">SRC造</option>
-                    </select>
-                </div>
-                <div class="field-row">
-                    <label>築年数</label>
-                    <input type="number" name="building_age" id="building_age" value="15" min="0" max="100">
-                </div>
-                <div class="field-row">
-                    <label>間取り</label>
-                    <input type="text" name="rooms" id="rooms" value="3LDK">
+                <div class="field-grid">
+                    <div class="field-row">
+                        <label>構造</label>
+                        <select name="structure" id="structure">
+                            <option value="木造">木造</option><option value="軽量鉄骨">軽量鉄骨</option>
+                            <option value="鉄骨造">鉄骨造</option><option value="RC造">RC造</option><option value="SRC造">SRC造</option>
+                        </select>
+                    </div>
+                    <div class="field-row">
+                        <label>間取り</label>
+                        <input type="text" name="rooms" id="rooms" value="3LDK">
+                    </div>
                 </div>
             </fieldset>
 
-            <!-- 写真 -->
+            <fieldset class="fieldset">
+                <legend>リフォーム履歴</legend>
+                <div id="renovationList"></div>
+                <button type="button" class="btn-add-renovation" id="btnAddRenovation">+ リフォーム履歴を追加</button>
+            </fieldset>
+
             <fieldset class="fieldset">
                 <legend>物件写真</legend>
                 <div class="photo-upload-area" id="photoDropZone">
                     <input type="file" id="photoInput" accept="image/*" multiple hidden>
-                    <p class="upload-text">クリックまたはドラッグ＆ドロップ</p>
+                    <p class="upload-text">&#128247; クリックまたはドラッグ＆ドロップ</p>
                     <p class="upload-hint">JPG, PNG, WebP（最大16MB）</p>
                 </div>
                 <div id="photoPreview" class="photo-preview"></div>
             </fieldset>
 
-            <!-- 売却シミュレーション -->
             <fieldset class="fieldset">
-                <legend>売却シミュレーション（任意）</legend>
-                <div class="field-row">
-                    <label>住宅ローン残高（万円）</label>
-                    <input type="number" name="mortgage_balance" id="mortgage_balance" value="2500" min="0">
-                </div>
-                <div class="field-row">
-                    <label>購入時価格（万円）</label>
-                    <input type="number" name="purchase_price" id="purchase_price" value="5500" min="0">
+                <legend>売却シミュレーション</legend>
+                <div class="field-grid">
+                    <div class="field-row">
+                        <label>ローン残高（万円）</label>
+                        <input type="number" name="mortgage_balance" id="mortgage_balance" value="2500" min="0">
+                    </div>
+                    <div class="field-row">
+                        <label>購入時価格（万円）</label>
+                        <input type="number" name="purchase_price" id="purchase_price" value="5500" min="0">
+                    </div>
                 </div>
                 <div class="field-row">
                     <label>購入時諸費用（万円）</label>
                     <input type="number" name="purchase_costs" id="purchase_costs" value="300" min="0">
                 </div>
                 <div class="field-row check-row">
-                    <label><input type="checkbox" name="is_residence" id="is_residence" checked> 居住用物件</label>
+                    <label><input type="checkbox" name="is_residence" id="is_residence" checked> 居住用物件（マイホーム特例対象）</label>
                 </div>
             </fieldset>
 
-            <!-- 相続 -->
             <fieldset class="fieldset">
                 <legend>相続シミュレーション</legend>
                 <div class="field-row">
@@ -170,30 +150,28 @@
                 </div>
             </fieldset>
 
-            <button type="submit" class="btn-assess">査定を実行</button>
+            <button type="submit" class="btn-assess" id="btnAssess">査定を実行</button>
         </form>
     </aside>
 
-    <!-- 右: ダッシュボード -->
     <section class="dashboard" id="dashboard">
-
-        <!-- 初期状態 -->
         <div class="empty-state" id="emptyState">
-            <div class="empty-icon">🏡</div>
+            <div class="empty-icon">&#127969;</div>
             <h2>物件情報を入力して査定を開始</h2>
-            <p>左側のフォームに物件の情報を入力し、「査定を実行」ボタンを押してください。</p>
+            <p>左側のフォームに物件の基本情報を入力してください。<br>土地の大きさ、建物の大きさ、築年数など概要を伝えるだけで<br>AI査定エンジンが不動産価格を自動算出します。</p>
         </div>
 
-        <!-- ローディング -->
         <div class="loading" id="loading" style="display:none;">
             <div class="spinner"></div>
-            <p>査定中...</p>
+            <p>査定エンジンで計算中...</p>
         </div>
 
-        <!-- 査定結果 -->
         <div class="results" id="results" style="display:none;">
 
-            <!-- 1段目: 査定価格ヘッダー -->
+            <!-- 物件概要サマリー -->
+            <div class="property-summary-bar" id="propertySummary"></div>
+
+            <!-- 価格ヒーロー -->
             <div class="price-hero">
                 <div class="price-hero-main">
                     <p class="price-label">価格ウォッチ推定市場価格</p>
@@ -201,22 +179,13 @@
                     <p class="price-range" id="priceRange">--</p>
                 </div>
                 <div class="price-hero-side">
-                    <div class="metric-card">
-                        <span class="metric-label">信頼度</span>
-                        <span class="metric-value" id="confidenceRank">--</span>
-                    </div>
-                    <div class="metric-card">
-                        <span class="metric-label">市場動向</span>
-                        <span class="metric-value small" id="marketTemp">--</span>
-                    </div>
-                    <div class="metric-card">
-                        <span class="metric-label">推定売却期間</span>
-                        <span class="metric-value small" id="avgDom">--</span>
-                    </div>
+                    <div class="metric-card"><span class="metric-label">信頼度</span><span class="metric-value" id="confidenceRank">--</span></div>
+                    <div class="metric-card"><span class="metric-label">市場動向</span><span class="metric-value small" id="marketTemp">--</span></div>
+                    <div class="metric-card"><span class="metric-label">推定売却期間</span><span class="metric-value small" id="avgDom">--</span></div>
                 </div>
             </div>
 
-            <!-- 2段目: 価格推移チャート -->
+            <!-- 価格推移チャート -->
             <div class="card full-width">
                 <div class="card-header">
                     <h3>価格推移</h3>
@@ -227,36 +196,28 @@
                         <button class="tab" data-years="10">10年</button>
                     </div>
                 </div>
-                <div class="chart-container">
-                    <canvas id="priceHistoryChart"></canvas>
-                </div>
+                <div class="chart-container"><canvas id="priceHistoryChart"></canvas></div>
             </div>
 
-            <!-- 3段目: 土地・建物内訳 -->
+            <!-- 土地・建物内訳 + 減価償却 -->
             <div class="card-row">
                 <div class="card">
                     <h3>査定内訳</h3>
-                    <div class="chart-container-sm">
-                        <canvas id="breakdownChart"></canvas>
-                    </div>
+                    <div class="chart-container-sm"><canvas id="breakdownChart"></canvas></div>
                     <div class="breakdown-detail" id="breakdownDetail"></div>
                 </div>
                 <div class="card">
                     <h3>建物減価償却（3層モデル）</h3>
-                    <div class="chart-container-sm">
-                        <canvas id="depreciationChart"></canvas>
-                    </div>
+                    <div class="chart-container-sm"><canvas id="depreciationChart"></canvas></div>
                     <div class="depreciation-detail" id="depreciationDetail"></div>
                 </div>
             </div>
 
-            <!-- 4段目: 査定精度・市場流動性 -->
+            <!-- 査定精度・市場流動性 -->
             <div class="card-row">
                 <div class="card">
                     <h3>査定精度指標</h3>
-                    <div class="chart-container-sm">
-                        <canvas id="confidenceChart"></canvas>
-                    </div>
+                    <div class="chart-container-sm"><canvas id="confidenceChart"></canvas></div>
                     <div id="confidenceNotes" class="notes-list"></div>
                 </div>
                 <div class="card">
@@ -265,50 +226,48 @@
                 </div>
             </div>
 
-            <!-- 5段目: 近隣売買事例 -->
+            <!-- 近隣㎡単価比較 -->
             <div class="card full-width">
-                <h3>近隣売買事例</h3>
+                <h3>近隣エリア &#13217;単価比較</h3>
+                <div class="chart-container"><canvas id="nearbyCompareChart"></canvas></div>
+            </div>
+
+            <!-- 近隣売買事例テーブル -->
+            <div class="card full-width">
+                <h3>近隣売買事例（直近20件）</h3>
                 <div class="table-scroll">
                     <table class="data-table" id="nearbyTable">
-                        <thead>
-                            <tr>
-                                <th>取引日</th>
-                                <th>所在地</th>
-                                <th>種別</th>
-                                <th>構造</th>
-                                <th>土地面積</th>
-                                <th>建物面積</th>
-                                <th>築年数</th>
-                                <th>㎡単価</th>
-                                <th>取引価格</th>
-                            </tr>
-                        </thead>
+                        <thead><tr>
+                            <th>取引日</th><th>所在地</th><th>種別</th><th>構造</th>
+                            <th>土地面積</th><th>建物面積</th><th>築年数</th><th>&#13217;単価</th><th>取引価格</th>
+                        </tr></thead>
                         <tbody id="nearbyBody"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- 6段目: 売却シミュレーション -->
+            <!-- 売却シミュレーション -->
             <div class="card full-width" id="saleSimCard" style="display:none;">
                 <h3>売却シミュレーション</h3>
                 <div class="sim-grid" id="saleSimContent"></div>
             </div>
 
-            <!-- 7段目: 相続シミュレーション -->
+            <!-- 相続シミュレーション -->
             <div class="card full-width">
                 <h3>相続シミュレーション</h3>
-                <div class="inheritance-grid" id="inheritanceContent"></div>
+                <div id="inheritanceContent"></div>
             </div>
 
-            <!-- 8段目: 査定メモ -->
+            <!-- 査定メモ -->
             <div class="card full-width">
-                <h3>査定メモ</h3>
+                <h3>査定メモ・注意事項</h3>
                 <ul class="notes-list" id="assessmentNotes"></ul>
             </div>
 
             <div class="disclaimer">
                 ※本査定は参考価格であり、実際の売買価格を保証するものではありません。<br>
-                ※最終的な売買価格は市場動向・交渉等により変動します。
+                ※最終的な売買価格は市場動向・交渉等により変動します。<br>
+                ※相続税の概算は目安であり、正確な税額は税理士にご相談ください。
             </div>
         </div>
     </section>
